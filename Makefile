@@ -1,9 +1,24 @@
-CC=gcc
-all: server deliver
+# Compiler and flags
+CC = gcc
+CFLAGS = -Wall -Wextra -std=c99 -g
 
+# Targets and source files
+TARGETS = server deliver
+SOURCES = server.c deliver.c
+
+# Default target
+all: $(TARGETS)
+
+# Rules for each target
 server: server.c
-	gcc server.c -o server
+	$(CC) $(CFLAGS) -o server server.c
+
 deliver: deliver.c
-	gcc deliver.c -lm -o deliver
+	$(CC) $(CFLAGS) -o deliver deliver.c
+
+# Clean up generated files
 clean:
-	rm -f *.o server deliver
+	rm -f $(TARGETS)
+
+# Phony targets
+.PHONY: all clean
